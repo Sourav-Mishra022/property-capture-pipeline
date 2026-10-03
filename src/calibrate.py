@@ -89,19 +89,17 @@ def wall_length(wall, res: float) -> Meas:
     return Meas(L, "m", L - Z95 * sigma, L + Z95 * sigma)
 
 
-def floor_area(walls, res: float, area: float) -> Meas:
-    # rectangle: pick the two distinct side lengths
-    lengths = sorted({round(w.length, 2) for w in walls})
-    if len(lengths) >= 2:
-        a, b = lengths[0], lengths[-1]
-        wa = next(w for w in walls if round(w.length, 2) == a)
-        wb = next(w for w in walls if round(w.length, 2) == b)
-        ra = (Z95 * np.sqrt(2) * _endpoint_sigma(res, wa.inlier_rms, wa.n_inliers)) / a
-        rb = (Z95 * np.sqrt(2) * _endpoint_sigma(res, wb.inlier_rms, wb.n_inliers)) / b
-        rel = float(np.hypot(ra, rb))
-    else:
-        rel = 0.1
-    return Meas(area, "m2", area * (1 - rel), area * (1 + rel))
+def floor_area(area: float, perimeter: float, res: float,
+               boundary_sigma: float = None) -> Meas:
+    """Area uncertainty via the boundary-shift model: displacing the whole
+    footprint boundary inward/outward by sigma_b changes the area by
+    sigma_b * perimeter. This is correct for an arbitrary polygon (no rectangle
+    assumption), so it stays sane for the irregular contour footprint.
+    sigma_b = grid resolution (+) systematic depth term."""
+    if boundary_sigma is None:
+        boundary_sigma = float(np.hypot(res, BETA_RANGE * TYPICAL_RANGE))
+    sigma_A = boundary_sigma * perimeter
+    return Meas(area, "m2", max(0.0, area - Z95 * sigma_A), area + Z95 * sigma_A)
 
 
 def opening_width(width: float, res: float, edge_rms: float = 0.03) -> Meas:

@@ -4,7 +4,7 @@
     "capture_id": "c00a170fe1",
     "tier": "lidar",
     "device": "sample-dataset",
-    "timestamp_utc": "2026-10-03T18:27:05.437483+00:00",
+    "timestamp_utc": "2026-10-03T18:30:36.125026+00:00",
     "command": "python run.py --capture data/c00a170fe1 --tier lidar --out outputs"
   },
   "rooms": [
@@ -855,8 +855,8 @@
         "value": 28.5888,
         "unit": "m2",
         "ci": {
-          "low": 7.3417,
-          "high": 49.8359,
+          "low": 26.2955,
+          "high": 30.8821,
           "level": 0.95,
           "method": "propagated"
         }
@@ -1047,8 +1047,8 @@
       "value": 28.5888,
       "unit": "m2",
       "ci": {
-        "low": 7.3417,
-        "high": 49.8359,
+        "low": 26.2955,
+        "high": 30.8821,
         "level": 0.95,
         "method": "propagated"
       }

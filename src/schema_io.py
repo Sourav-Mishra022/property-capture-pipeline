@@ -19,7 +19,7 @@ def build_output(recon, capture_id: str, tier: str, command: str,
                            "endpoints": [list(w.p0), list(w.p1)]})
 
     ch = cal.ceiling_height(recon.floor, recon.ceiling)
-    fa = cal.floor_area(fp.walls, res, fp.area)
+    fa = cal.floor_area(fp.area, fp.perimeter, res)
 
     openings_json = []
     for i, op in enumerate(openings or []):
