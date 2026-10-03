@@ -1,0 +1,247 @@
+{
+  "schema_version": "0.1.0",
+  "capture": {
+    "capture_id": "c00a170fe1",
+    "tier": "lidar",
+    "device": "sample-dataset",
+    "timestamp_utc": "2026-10-03T18:17:14.516101+00:00",
+    "command": "python run.py --capture data/c00a170fe1 --tier lidar --out outputs"
+  },
+  "rooms": [
+    {
+      "room_id": "room_1",
+      "floor_polygon": [
+        [
+          -2.802,
+          4.987
+        ],
+        [
+          -3.856,
+          -1.549
+        ],
+        [
+          0.537,
+          -2.257
+        ],
+        [
+          1.591,
+          4.278
+        ]
+      ],
+      "walls": [
+        {
+          "wall_id": "w1",
+          "length": {
+            "value": 6.6202,
+            "unit": "m",
+            "ci": {
+              "low": 6.4998,
+              "high": 6.7407,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -2.8016014099121094,
+              4.986809730529785
+            ],
+            [
+              -3.855759859085083,
+              -1.548972249031067
+            ]
+          ]
+        },
+        {
+          "wall_id": "w2",
+          "length": {
+            "value": 4.4496,
+            "unit": "m",
+            "ci": {
+              "low": 4.3305,
+              "high": 4.5687,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -3.855759859085083,
+              -1.548972249031067
+            ],
+            [
+              0.5370595455169678,
+              -2.2574915885925293
+            ]
+          ]
+        },
+        {
+          "wall_id": "w3",
+          "length": {
+            "value": 6.6202,
+            "unit": "m",
+            "ci": {
+              "low": 6.5058,
+              "high": 6.7347,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              0.5370595455169678,
+              -2.2574915885925293
+            ],
+            [
+              1.5912179946899414,
+              4.278290748596191
+            ]
+          ]
+        },
+        {
+          "wall_id": "w4",
+          "length": {
+            "value": 4.4496,
+            "unit": "m",
+            "ci": {
+              "low": 4.3238,
+              "high": 4.5754,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              1.5912179946899414,
+              4.278290748596191
+            ],
+            [
+              -2.8016014099121094,
+              4.986809730529785
+            ]
+          ]
+        }
+      ],
+      "floor_area": {
+        "value": 29.4574,
+        "unit": "m2",
+        "ci": {
+          "low": 28.5038,
+          "high": 30.411,
+          "level": 0.95,
+          "method": "propagated"
+        }
+      },
+      "ceiling_height": {
+        "value": 2.0355,
+        "unit": "m",
+        "ci": {
+          "low": 2.0127,
+          "high": 2.0583,
+          "level": 0.95,
+          "method": "propagated"
+        },
+        "bias_or_noise": "within_gate"
+      },
+      "openings": [
+        {
+          "opening_id": "o1",
+          "type": "door",
+          "width": {
+            "value": 2.8,
+            "unit": "m",
+            "ci": {
+              "low": 2.6614,
+              "high": 2.9386,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "on_wall": "w3",
+          "detection_confidence": 0.55
+        },
+        {
+          "opening_id": "o2",
+          "type": "window",
+          "width": {
+            "value": 0.96,
+            "unit": "m",
+            "ci": {
+              "low": 0.8214,
+              "high": 1.0986,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "on_wall": "w4",
+          "detection_confidence": 0.5
+        }
+      ],
+      "surfaces": [
+        {
+          "surface_id": "floor",
+          "kind": "floor",
+          "damage": []
+        },
+        {
+          "surface_id": "ceiling",
+          "kind": "ceiling",
+          "damage": []
+        },
+        {
+          "surface_id": "w1",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w2",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w3",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w4",
+          "kind": "wall",
+          "damage": []
+        }
+      ]
+    }
+  ],
+  "property_plan": {
+    "footprint_area": {
+      "value": 29.4574,
+      "unit": "m2",
+      "ci": {
+        "low": 28.5038,
+        "high": 30.411,
+        "level": 0.95,
+        "method": "propagated"
+      }
+    },
+    "adjacency": [],
+    "overlaps_detected": false,
+    "rendered_plan_path": "c00a170fe1_plan.png"
+  },
+  "provenance": {
+    "tier": "lidar",
+    "drift_handling": {
+      "method": "plane_anchored",
+      "floor_tilt_deg_before": 0.044,
+      "ablation_footprint_off_m2": 29.457,
+      "ablation_footprint_on_m2": 29.78,
+      "note": "Single-room capture: no loop to close, so the correction is small by construction. Interface accepts pose-graph output for multi-room (see report)."
+    },
+    "calibration": {
+      "interval_method": "propagated (sensor-noise model)",
+      "coverage_observed": null,
+      "note": "No laser ground truth available on this capture; empirical coverage unvalidated. Intervals widen with data sparsity by construction."
+    },
+    "hard_surfaces": {
+      "notes": "Low-confidence ARKit depth (conf<2) dropped, which removes most mirror/glass/wet-look returns; see report."
+    }
+  }
+}

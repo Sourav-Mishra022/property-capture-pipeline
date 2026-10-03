@@ -4,87 +4,179 @@
   "title": "Property Capture Output Contract",
   "description": "Per-capture output produced identically by every input tier (photos, video, LiDAR). Every measurement carries a confidence interval. Intervals widen honestly as sensor data thins. Lengths in metres, areas in square metres, angles in degrees unless noted.",
   "type": "object",
-  "required": ["schema_version", "capture", "rooms", "property_plan", "provenance"],
+  "required": [
+    "schema_version",
+    "capture",
+    "rooms",
+    "property_plan",
+    "provenance"
+  ],
   "properties": {
-    "schema_version": { "type": "string", "const": "0.1.0" },
-
+    "schema_version": {
+      "type": "string",
+      "const": "0.1.0"
+    },
     "capture": {
       "type": "object",
-      "required": ["capture_id", "tier", "device", "timestamp_utc"],
+      "required": [
+        "capture_id",
+        "tier",
+        "device",
+        "timestamp_utc"
+      ],
       "properties": {
-        "capture_id": { "type": "string", "description": "Stable id for this capture." },
-        "tier": { "type": "string", "enum": ["photos", "video", "lidar"], "description": "Input tier this capture was produced from." },
-        "device": { "type": "string", "description": "Capture device, e.g. 'iPhone 15 Pro' or 'sample-dataset'." },
-        "timestamp_utc": { "type": "string", "format": "date-time" },
-        "command": { "type": "string", "description": "The single command that regenerates this output from raw inputs." }
-      }
-    },
-
-    "measurement": {
-      "$comment": "Reusable shape: every numeric measurement in this document uses this form.",
-      "type": "object",
-      "required": ["value", "unit", "ci"],
-      "properties": {
-        "value": { "type": "number" },
-        "unit": { "type": "string", "enum": ["m", "m2", "deg", "ratio"] },
-        "ci": {
-          "type": "object",
-          "required": ["low", "high", "level", "method"],
-          "properties": {
-            "low": { "type": "number" },
-            "high": { "type": "number" },
-            "level": { "type": "number", "description": "Interval mass, e.g. 0.95.", "default": 0.95 },
-            "method": { "type": "string", "enum": ["conformal", "residual_bootstrap", "propagated", "prior"], "description": "How the interval was derived. 'prior' means fallback/hand-set and is flagged as low-trust." }
-          }
+        "capture_id": {
+          "type": "string",
+          "description": "Stable id for this capture."
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "photos",
+            "video",
+            "lidar"
+          ],
+          "description": "Input tier this capture was produced from."
+        },
+        "device": {
+          "type": "string",
+          "description": "Capture device, e.g. 'iPhone 15 Pro' or 'sample-dataset'."
+        },
+        "timestamp_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "command": {
+          "type": "string",
+          "description": "The single command that regenerates this output from raw inputs."
         }
       }
     },
-
     "rooms": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["room_id", "walls", "floor_area", "ceiling_height", "openings", "surfaces"],
+        "required": [
+          "room_id",
+          "walls",
+          "floor_area",
+          "ceiling_height",
+          "openings",
+          "surfaces"
+        ],
         "properties": {
-          "room_id": { "type": "string" },
-          "label": { "type": "string", "description": "Human label, e.g. 'bedroom'. Optional." },
+          "room_id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string",
+            "description": "Human label, e.g. 'bedroom'. Optional."
+          },
           "floor_polygon": {
             "type": "array",
             "description": "Ordered 2D vertices of the room footprint in property-plan coordinates (metres).",
-            "items": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
           },
           "walls": {
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["wall_id", "length", "endpoints"],
+              "required": [
+                "wall_id",
+                "length",
+                "endpoints"
+              ],
               "properties": {
-                "wall_id": { "type": "string" },
-                "length": { "$ref": "#/measurement" },
-                "endpoints": { "type": "array", "items": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }, "minItems": 2, "maxItems": 2 }
+                "wall_id": {
+                  "type": "string"
+                },
+                "length": {
+                  "$ref": "#/$defs/measurement"
+                },
+                "endpoints": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
               }
             }
           },
-          "floor_area": { "$ref": "#/measurement" },
+          "floor_area": {
+            "$ref": "#/$defs/measurement"
+          },
           "ceiling_height": {
-            "allOf": [{ "$ref": "#/measurement" }],
+            "allOf": [
+              {
+                "$ref": "#/$defs/measurement"
+              }
+            ],
             "description": "Reported per room. Where the room is captured more than once, see repeatability block.",
-            "properties": { "bias_or_noise": { "type": "string", "enum": ["repeatable_biased", "unrepeatable", "within_gate"], "description": "Required self-report for the ceiling-height gate." } }
+            "properties": {
+              "bias_or_noise": {
+                "type": "string",
+                "enum": [
+                  "repeatable_biased",
+                  "unrepeatable",
+                  "within_gate"
+                ],
+                "description": "Required self-report for the ceiling-height gate."
+              }
+            }
           },
           "openings": {
             "type": "array",
             "description": "Doors, windows, pass-throughs. Detection is scored; a phantom opening is a miss.",
             "items": {
               "type": "object",
-              "required": ["opening_id", "type", "width"],
+              "required": [
+                "opening_id",
+                "type",
+                "width"
+              ],
               "properties": {
-                "opening_id": { "type": "string" },
-                "type": { "type": "string", "enum": ["door", "window", "passthrough", "unknown"] },
-                "width": { "$ref": "#/measurement" },
-                "height": { "$ref": "#/measurement" },
-                "on_wall": { "type": "string", "description": "wall_id this opening sits on." },
-                "detection_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+                "opening_id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "door",
+                    "window",
+                    "passthrough",
+                    "unknown"
+                  ]
+                },
+                "width": {
+                  "$ref": "#/$defs/measurement"
+                },
+                "height": {
+                  "$ref": "#/$defs/measurement"
+                },
+                "on_wall": {
+                  "type": "string",
+                  "description": "wall_id this opening sits on."
+                },
+                "detection_confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
               }
             }
           },
@@ -93,24 +185,53 @@
             "description": "Walls, floor, ceiling as damage-bearing surfaces. Damage regions key to these.",
             "items": {
               "type": "object",
-              "required": ["surface_id", "kind"],
+              "required": [
+                "surface_id",
+                "kind"
+              ],
               "properties": {
-                "surface_id": { "type": "string" },
-                "kind": { "type": "string", "enum": ["wall", "floor", "ceiling"] },
+                "surface_id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "wall",
+                    "floor",
+                    "ceiling"
+                  ]
+                },
                 "damage": {
                   "type": "array",
                   "items": {
                     "type": "object",
-                    "required": ["damage_id", "class", "extent"],
+                    "required": [
+                      "damage_id",
+                      "class",
+                      "extent"
+                    ],
                     "properties": {
-                      "damage_id": { "type": "string" },
-                      "class": { "type": "string", "description": "Damage class, e.g. 'water_stain', 'crack', 'hole'." },
-                      "extent": { "$ref": "#/measurement", "description": "Metric extent (area or length) of the damage region." },
+                      "damage_id": {
+                        "type": "string"
+                      },
+                      "class": {
+                        "type": "string",
+                        "description": "Damage class, e.g. 'water_stain', 'crack', 'hole'."
+                      },
+                      "extent": {
+                        "$ref": "#/$defs/measurement",
+                        "description": "Metric extent (area or length) of the damage region."
+                      },
                       "concealed_flag": {
                         "type": "object",
                         "properties": {
-                          "flagged": { "type": "boolean" },
-                          "rule": { "type": "string", "description": "The rule that fired, required when flagged is true." }
+                          "flagged": {
+                            "type": "boolean"
+                          },
+                          "rule": {
+                            "type": "string",
+                            "description": "The rule that fired, required when flagged is true."
+                          }
                         }
                       }
                     }
@@ -122,87 +243,235 @@
         }
       }
     },
-
     "property_plan": {
       "type": "object",
       "description": "Stitched whole-property plan: every room placed, connected and dimensioned.",
-      "required": ["footprint_area", "adjacency"],
+      "required": [
+        "footprint_area",
+        "adjacency"
+      ],
       "properties": {
-        "footprint_area": { "$ref": "#/measurement" },
+        "footprint_area": {
+          "$ref": "#/$defs/measurement"
+        },
         "adjacency": {
           "type": "array",
           "description": "Which rooms connect, and through which opening.",
           "items": {
             "type": "object",
-            "required": ["room_a", "room_b"],
+            "required": [
+              "room_a",
+              "room_b"
+            ],
             "properties": {
-              "room_a": { "type": "string" },
-              "room_b": { "type": "string" },
-              "via_opening": { "type": "string" }
+              "room_a": {
+                "type": "string"
+              },
+              "room_b": {
+                "type": "string"
+              },
+              "via_opening": {
+                "type": "string"
+              }
             }
           }
         },
-        "overlaps_detected": { "type": "boolean", "description": "True if any two room polygons overlap (a stitch failure)." },
-        "rendered_plan_path": { "type": "string", "description": "Relative path to the rendered top-down plan image." }
+        "overlaps_detected": {
+          "type": "boolean",
+          "description": "True if any two room polygons overlap (a stitch failure)."
+        },
+        "rendered_plan_path": {
+          "type": "string",
+          "description": "Relative path to the rendered top-down plan image."
+        }
       }
     },
-
     "repeatability": {
       "type": "array",
       "description": "Populated when a room is captured twice at the same tier. Drives the repeatability gate.",
       "items": {
         "type": "object",
-        "required": ["room_id", "tier", "agreement"],
+        "required": [
+          "room_id",
+          "tier",
+          "agreement"
+        ],
         "properties": {
-          "room_id": { "type": "string" },
-          "tier": { "type": "string", "enum": ["photos", "video", "lidar"] },
-          "agreement": { "type": "object", "properties": { "max_wall_delta_m": { "type": "number" }, "max_wall_delta_pct": { "type": "number" }, "ceiling_spread_m": { "type": "number" } } }
+          "room_id": {
+            "type": "string"
+          },
+          "tier": {
+            "type": "string",
+            "enum": [
+              "photos",
+              "video",
+              "lidar"
+            ]
+          },
+          "agreement": {
+            "type": "object",
+            "properties": {
+              "max_wall_delta_m": {
+                "type": "number"
+              },
+              "max_wall_delta_pct": {
+                "type": "number"
+              },
+              "ceiling_spread_m": {
+                "type": "number"
+              }
+            }
+          }
         }
       }
     },
-
     "scope": {
       "type": "array",
       "description": "Scope line items keyed to surfaces.",
       "items": {
         "type": "object",
-        "required": ["line_id", "surface_id", "description"],
+        "required": [
+          "line_id",
+          "surface_id",
+          "description"
+        ],
         "properties": {
-          "line_id": { "type": "string" },
-          "surface_id": { "type": "string" },
-          "description": { "type": "string" },
-          "quantity": { "$ref": "#/measurement" }
+          "line_id": {
+            "type": "string"
+          },
+          "surface_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "quantity": {
+            "$ref": "#/$defs/measurement"
+          }
         }
       }
     },
-
     "provenance": {
       "type": "object",
       "description": "Everything needed to trust and regenerate the numbers.",
-      "required": ["tier", "drift_handling"],
+      "required": [
+        "tier",
+        "drift_handling"
+      ],
       "properties": {
-        "tier": { "type": "string", "enum": ["photos", "video", "lidar"] },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "photos",
+            "video",
+            "lidar"
+          ]
+        },
         "drift_handling": {
           "type": "object",
           "description": "Required. 'poses used as-is' is an automatic fail on the drift gate.",
-          "required": ["method"],
+          "required": [
+            "method"
+          ],
           "properties": {
-            "method": { "type": "string", "enum": ["loop_closure", "pose_graph", "plane_anchored", "none_single_room", "poses_as_is"] },
-            "ablation_footprint_on_m2": { "type": "number" },
-            "ablation_footprint_off_m2": { "type": "number" }
+            "method": {
+              "type": "string",
+              "enum": [
+                "loop_closure",
+                "pose_graph",
+                "plane_anchored",
+                "none_single_room",
+                "poses_as_is"
+              ]
+            },
+            "ablation_footprint_on_m2": {
+              "type": "number"
+            },
+            "ablation_footprint_off_m2": {
+              "type": "number"
+            }
           }
         },
         "calibration": {
           "type": "object",
           "properties": {
-            "interval_method": { "type": "string" },
-            "coverage_observed": { "type": "number", "description": "Empirical coverage of the stated intervals on held-out ground truth." }
+            "interval_method": {
+              "type": "string"
+            },
+            "coverage_observed": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Empirical coverage of the stated intervals on held-out ground truth."
+            }
           }
         },
         "hard_surfaces": {
           "type": "object",
           "description": "How mirrors, glass, wet-look and low-light regions were handled.",
-          "properties": { "notes": { "type": "string" } }
+          "properties": {
+            "notes": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "measurement": {
+      "$comment": "Reusable shape: every numeric measurement in this document uses this form.",
+      "type": "object",
+      "required": [
+        "value",
+        "unit",
+        "ci"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "m",
+            "m2",
+            "deg",
+            "ratio"
+          ]
+        },
+        "ci": {
+          "type": "object",
+          "required": [
+            "low",
+            "high",
+            "level",
+            "method"
+          ],
+          "properties": {
+            "low": {
+              "type": "number"
+            },
+            "high": {
+              "type": "number"
+            },
+            "level": {
+              "type": "number",
+              "description": "Interval mass, e.g. 0.95.",
+              "default": 0.95
+            },
+            "method": {
+              "type": "string",
+              "enum": [
+                "conformal",
+                "residual_bootstrap",
+                "propagated",
+                "prior"
+              ],
+              "description": "How the interval was derived. 'prior' means fallback/hand-set and is flagged as low-trust."
+            }
+          }
         }
       }
     }
