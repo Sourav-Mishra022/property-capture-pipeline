@@ -1,0 +1,7 @@
+data/
+outputs/*.ply
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
