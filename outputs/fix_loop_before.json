@@ -1,0 +1,24 @@
+{
+  "room_id": "room_1",
+  "tier": "lidar",
+  "footprint_method": "box",
+  "note": "disjoint frame split (even vs odd) \u2014 proxy for two physical captures; measures pipeline determinism + input sensitivity.",
+  "even": {
+    "area_m2": 28.7,
+    "perimeter_m": 21.83,
+    "ceiling_m": 2.072
+  },
+  "odd": {
+    "area_m2": 29.02,
+    "perimeter_m": 21.57,
+    "ceiling_m": 2.033
+  },
+  "agreement": {
+    "area_delta_m2": 0.32,
+    "area_delta_pct": 1.1,
+    "perimeter_delta_pct": 1.17,
+    "ceiling_spread_m": 0.039
+  },
+  "gate_area_pass_2pct": true,
+  "gate_ceiling_pass_1cm": false
+}

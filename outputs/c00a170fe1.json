@@ -4,7 +4,7 @@
     "capture_id": "c00a170fe1",
     "tier": "lidar",
     "device": "sample-dataset",
-    "timestamp_utc": "2026-10-03T18:17:14.516101+00:00",
+    "timestamp_utc": "2026-10-03T18:25:06.864642+00:00",
     "command": "python run.py --capture data/c00a170fe1 --tier lidar --out outputs"
   },
   "rooms": [
@@ -12,122 +12,851 @@
       "room_id": "room_1",
       "floor_polygon": [
         [
-          -2.802,
-          4.987
+          0.481,
+          -2.47
         ],
         [
-          -3.856,
-          -1.549
+          -0.879,
+          -1.91
         ],
         [
-          0.537,
-          -2.257
+          -1.479,
+          -0.83
         ],
         [
-          1.591,
-          4.278
+          -2.279,
+          -0.87
+        ],
+        [
+          -2.479,
+          -0.19
+        ],
+        [
+          -3.239,
+          -0.15
+        ],
+        [
+          -3.519,
+          1.21
+        ],
+        [
+          -3.879,
+          1.25
+        ],
+        [
+          -4.279,
+          0.77
+        ],
+        [
+          -4.559,
+          1.81
+        ],
+        [
+          -4.879,
+          2.09
+        ],
+        [
+          -4.479,
+          2.33
+        ],
+        [
+          -4.439,
+          2.93
+        ],
+        [
+          -2.719,
+          2.89
+        ],
+        [
+          -2.239,
+          3.69
+        ],
+        [
+          -2.199,
+          6.09
+        ],
+        [
+          -1.119,
+          5.29
+        ],
+        [
+          -0.679,
+          4.45
+        ],
+        [
+          0.081,
+          4.41
+        ],
+        [
+          0.481,
+          4.65
+        ],
+        [
+          1.481,
+          3.13
+        ],
+        [
+          1.001,
+          2.77
+        ],
+        [
+          0.961,
+          2.41
+        ],
+        [
+          0.521,
+          2.33
+        ],
+        [
+          0.521,
+          1.85
+        ],
+        [
+          1.321,
+          1.57
+        ],
+        [
+          1.361,
+          0.85
+        ],
+        [
+          2.281,
+          0.45
+        ],
+        [
+          2.281,
+          0.21
+        ],
+        [
+          1.561,
+          -0.75
+        ],
+        [
+          0.721,
+          -0.87
         ]
       ],
       "walls": [
         {
           "wall_id": "w1",
           "length": {
-            "value": 6.6202,
+            "value": 1.4708,
             "unit": "m",
             "ci": {
-              "low": 6.4998,
-              "high": 6.7407,
+              "low": 1.2933,
+              "high": 1.6483,
               "level": 0.95,
               "method": "propagated"
             }
           },
           "endpoints": [
             [
-              -2.8016014099121094,
-              4.986809730529785
+              0.4810702531718034,
+              -2.470026667878596
             ],
             [
-              -3.855759859085083,
-              -1.548972249031067
+              -0.878929746828196,
+              -1.9100266678785962
             ]
           ]
         },
         {
           "wall_id": "w2",
           "length": {
-            "value": 4.4496,
+            "value": 1.2355,
             "unit": "m",
             "ci": {
-              "low": 4.3305,
-              "high": 4.5687,
+              "low": 1.058,
+              "high": 1.413,
               "level": 0.95,
               "method": "propagated"
             }
           },
           "endpoints": [
             [
-              -3.855759859085083,
-              -1.548972249031067
+              -0.878929746828196,
+              -1.9100266678785962
             ],
             [
-              0.5370595455169678,
-              -2.2574915885925293
+              -1.4789297468281961,
+              -0.8300266678785961
             ]
           ]
         },
         {
           "wall_id": "w3",
           "length": {
-            "value": 6.6202,
+            "value": 0.801,
             "unit": "m",
             "ci": {
-              "low": 6.5058,
-              "high": 6.7347,
+              "low": 0.6235,
+              "high": 0.9785,
               "level": 0.95,
               "method": "propagated"
             }
           },
           "endpoints": [
             [
-              0.5370595455169678,
-              -2.2574915885925293
+              -1.4789297468281961,
+              -0.8300266678785961
             ],
             [
-              1.5912179946899414,
-              4.278290748596191
+              -2.2789297468281964,
+              -0.870026667878596
             ]
           ]
         },
         {
           "wall_id": "w4",
           "length": {
-            "value": 4.4496,
+            "value": 0.7088,
             "unit": "m",
             "ci": {
-              "low": 4.3238,
-              "high": 4.5754,
+              "low": 0.5313,
+              "high": 0.8863,
               "level": 0.95,
               "method": "propagated"
             }
           },
           "endpoints": [
             [
-              1.5912179946899414,
-              4.278290748596191
+              -2.2789297468281964,
+              -0.870026667878596
             ],
             [
-              -2.8016014099121094,
-              4.986809730529785
+              -2.478929746828196,
+              -0.190026667878596
+            ]
+          ]
+        },
+        {
+          "wall_id": "w5",
+          "length": {
+            "value": 0.7611,
+            "unit": "m",
+            "ci": {
+              "low": 0.5836,
+              "high": 0.9385,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -2.478929746828196,
+              -0.190026667878596
+            ],
+            [
+              -3.2389297468281963,
+              -0.15002666787859598
+            ]
+          ]
+        },
+        {
+          "wall_id": "w6",
+          "length": {
+            "value": 1.3885,
+            "unit": "m",
+            "ci": {
+              "low": 1.211,
+              "high": 1.566,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -3.2389297468281963,
+              -0.15002666787859598
+            ],
+            [
+              -3.5189297468281966,
+              1.209973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w7",
+          "length": {
+            "value": 0.3622,
+            "unit": "m",
+            "ci": {
+              "low": 0.1847,
+              "high": 0.5397,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -3.5189297468281966,
+              1.209973332121404
+            ],
+            [
+              -3.878929746828196,
+              1.249973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w8",
+          "length": {
+            "value": 0.6248,
+            "unit": "m",
+            "ci": {
+              "low": 0.4473,
+              "high": 0.8023,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -3.878929746828196,
+              1.249973332121404
+            ],
+            [
+              -4.278929746828196,
+              0.769973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w9",
+          "length": {
+            "value": 1.077,
+            "unit": "m",
+            "ci": {
+              "low": 0.8996,
+              "high": 1.2545,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -4.278929746828196,
+              0.769973332121404
+            ],
+            [
+              -4.558929746828197,
+              1.8099733321214044
+            ]
+          ]
+        },
+        {
+          "wall_id": "w10",
+          "length": {
+            "value": 0.4252,
+            "unit": "m",
+            "ci": {
+              "low": 0.2477,
+              "high": 0.6027,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -4.558929746828197,
+              1.8099733321214044
+            ],
+            [
+              -4.878929746828196,
+              2.089973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w11",
+          "length": {
+            "value": 0.4665,
+            "unit": "m",
+            "ci": {
+              "low": 0.289,
+              "high": 0.644,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -4.878929746828196,
+              2.089973332121404
+            ],
+            [
+              -4.478929746828197,
+              2.329973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w12",
+          "length": {
+            "value": 0.6013,
+            "unit": "m",
+            "ci": {
+              "low": 0.4238,
+              "high": 0.7788,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -4.478929746828197,
+              2.329973332121404
+            ],
+            [
+              -4.4389297468281965,
+              2.9299733321214037
+            ]
+          ]
+        },
+        {
+          "wall_id": "w13",
+          "length": {
+            "value": 1.7205,
+            "unit": "m",
+            "ci": {
+              "low": 1.543,
+              "high": 1.8979,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -4.4389297468281965,
+              2.9299733321214037
+            ],
+            [
+              -2.7189297468281963,
+              2.8899733321214036
+            ]
+          ]
+        },
+        {
+          "wall_id": "w14",
+          "length": {
+            "value": 0.933,
+            "unit": "m",
+            "ci": {
+              "low": 0.7555,
+              "high": 1.1104,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -2.7189297468281963,
+              2.8899733321214036
+            ],
+            [
+              -2.2389297468281963,
+              3.6899733321214043
+            ]
+          ]
+        },
+        {
+          "wall_id": "w15",
+          "length": {
+            "value": 2.4003,
+            "unit": "m",
+            "ci": {
+              "low": 2.2229,
+              "high": 2.5778,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -2.2389297468281963,
+              3.6899733321214043
+            ],
+            [
+              -2.1989297468281963,
+              6.089973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w16",
+          "length": {
+            "value": 1.344,
+            "unit": "m",
+            "ci": {
+              "low": 1.1665,
+              "high": 1.5215,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -2.1989297468281963,
+              6.089973332121404
+            ],
+            [
+              -1.1189297468281962,
+              5.289973332121405
+            ]
+          ]
+        },
+        {
+          "wall_id": "w17",
+          "length": {
+            "value": 0.9483,
+            "unit": "m",
+            "ci": {
+              "low": 0.7708,
+              "high": 1.1257,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -1.1189297468281962,
+              5.289973332121405
+            ],
+            [
+              -0.6789297468281958,
+              4.449973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w18",
+          "length": {
+            "value": 0.7611,
+            "unit": "m",
+            "ci": {
+              "low": 0.6377,
+              "high": 0.8844,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              -0.6789297468281958,
+              4.449973332121404
+            ],
+            [
+              0.08107025317180394,
+              4.409973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w19",
+          "length": {
+            "value": 0.4665,
+            "unit": "m",
+            "ci": {
+              "low": 0.3193,
+              "high": 0.6136,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              0.08107025317180394,
+              4.409973332121404
+            ],
+            [
+              0.4810702531718034,
+              4.649973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w20",
+          "length": {
+            "value": 1.8195,
+            "unit": "m",
+            "ci": {
+              "low": 1.7053,
+              "high": 1.9336,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              0.4810702531718034,
+              4.649973332121404
+            ],
+            [
+              1.4810702531718034,
+              3.129973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w21",
+          "length": {
+            "value": 0.6,
+            "unit": "m",
+            "ci": {
+              "low": 0.4726,
+              "high": 0.7274,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              1.4810702531718034,
+              3.129973332121404
+            ],
+            [
+              1.0010702531718039,
+              2.7699733321214044
+            ]
+          ]
+        },
+        {
+          "wall_id": "w22",
+          "length": {
+            "value": 0.3622,
+            "unit": "m",
+            "ci": {
+              "low": 0.0454,
+              "high": 0.6791,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              1.0010702531718039,
+              2.7699733321214044
+            ],
+            [
+              0.9610702531718038,
+              2.409973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w23",
+          "length": {
+            "value": 0.4472,
+            "unit": "m",
+            "ci": {
+              "low": 0.2697,
+              "high": 0.6247,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              0.9610702531718038,
+              2.409973332121404
+            ],
+            [
+              0.5210702531718034,
+              2.329973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w24",
+          "length": {
+            "value": 0.48,
+            "unit": "m",
+            "ci": {
+              "low": 0.3025,
+              "high": 0.6575,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              0.5210702531718034,
+              2.329973332121404
+            ],
+            [
+              0.5210702531718034,
+              1.8499733321214045
+            ]
+          ]
+        },
+        {
+          "wall_id": "w25",
+          "length": {
+            "value": 0.8476,
+            "unit": "m",
+            "ci": {
+              "low": 0.6701,
+              "high": 1.0251,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              0.5210702531718034,
+              1.8499733321214045
+            ],
+            [
+              1.3210702531718042,
+              1.5699733321214042
+            ]
+          ]
+        },
+        {
+          "wall_id": "w26",
+          "length": {
+            "value": 0.7211,
+            "unit": "m",
+            "ci": {
+              "low": 0.5436,
+              "high": 0.8986,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              1.3210702531718042,
+              1.5699733321214042
+            ],
+            [
+              1.3610702531718042,
+              0.849973332121404
+            ]
+          ]
+        },
+        {
+          "wall_id": "w27",
+          "length": {
+            "value": 1.0032,
+            "unit": "m",
+            "ci": {
+              "low": 0.8257,
+              "high": 1.1807,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              1.3610702531718042,
+              0.849973332121404
+            ],
+            [
+              2.281070253171804,
+              0.4499733321214041
+            ]
+          ]
+        },
+        {
+          "wall_id": "w28",
+          "length": {
+            "value": 0.24,
+            "unit": "m",
+            "ci": {
+              "low": 0.0625,
+              "high": 0.4175,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              2.281070253171804,
+              0.4499733321214041
+            ],
+            [
+              2.281070253171804,
+              0.2099733321214039
+            ]
+          ]
+        },
+        {
+          "wall_id": "w29",
+          "length": {
+            "value": 1.2,
+            "unit": "m",
+            "ci": {
+              "low": 1.0225,
+              "high": 1.3775,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              2.281070253171804,
+              0.2099733321214039
+            ],
+            [
+              1.5610702531718035,
+              -0.7500266678785961
+            ]
+          ]
+        },
+        {
+          "wall_id": "w30",
+          "length": {
+            "value": 0.8485,
+            "unit": "m",
+            "ci": {
+              "low": 0.671,
+              "high": 1.026,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              1.5610702531718035,
+              -0.7500266678785961
+            ],
+            [
+              0.7210702531718036,
+              -0.870026667878596
+            ]
+          ]
+        },
+        {
+          "wall_id": "w31",
+          "length": {
+            "value": 1.6179,
+            "unit": "m",
+            "ci": {
+              "low": 1.5038,
+              "high": 1.732,
+              "level": 0.95,
+              "method": "propagated"
+            }
+          },
+          "endpoints": [
+            [
+              0.7210702531718036,
+              -0.870026667878596
+            ],
+            [
+              0.4810702531718034,
+              -2.470026667878596
             ]
           ]
         }
       ],
       "floor_area": {
-        "value": 29.4574,
+        "value": 28.5888,
         "unit": "m2",
         "ci": {
-          "low": 28.5038,
-          "high": 30.411,
+          "low": 7.3417,
+          "high": 49.8359,
           "level": 0.95,
           "method": "propagated"
         }
@@ -143,40 +872,7 @@
         },
         "bias_or_noise": "within_gate"
       },
-      "openings": [
-        {
-          "opening_id": "o1",
-          "type": "door",
-          "width": {
-            "value": 2.8,
-            "unit": "m",
-            "ci": {
-              "low": 2.6614,
-              "high": 2.9386,
-              "level": 0.95,
-              "method": "propagated"
-            }
-          },
-          "on_wall": "w3",
-          "detection_confidence": 0.55
-        },
-        {
-          "opening_id": "o2",
-          "type": "window",
-          "width": {
-            "value": 0.96,
-            "unit": "m",
-            "ci": {
-              "low": 0.8214,
-              "high": 1.0986,
-              "level": 0.95,
-              "method": "propagated"
-            }
-          },
-          "on_wall": "w4",
-          "detection_confidence": 0.5
-        }
-      ],
+      "openings": [],
       "surfaces": [
         {
           "surface_id": "floor",
@@ -207,17 +903,152 @@
           "surface_id": "w4",
           "kind": "wall",
           "damage": []
+        },
+        {
+          "surface_id": "w5",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w6",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w7",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w8",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w9",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w10",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w11",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w12",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w13",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w14",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w15",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w16",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w17",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w18",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w19",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w20",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w21",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w22",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w23",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w24",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w25",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w26",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w27",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w28",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w29",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w30",
+          "kind": "wall",
+          "damage": []
+        },
+        {
+          "surface_id": "w31",
+          "kind": "wall",
+          "damage": []
         }
       ]
     }
   ],
   "property_plan": {
     "footprint_area": {
-      "value": 29.4574,
+      "value": 28.5888,
       "unit": "m2",
       "ci": {
-        "low": 28.5038,
-        "high": 30.411,
+        "low": 7.3417,
+        "high": 49.8359,
         "level": 0.95,
         "method": "propagated"
       }
@@ -229,11 +1060,7 @@
   "provenance": {
     "tier": "lidar",
     "drift_handling": {
-      "method": "plane_anchored",
-      "floor_tilt_deg_before": 0.044,
-      "ablation_footprint_off_m2": 29.457,
-      "ablation_footprint_on_m2": 29.78,
-      "note": "Single-room capture: no loop to close, so the correction is small by construction. Interface accepts pose-graph output for multi-room (see report)."
+      "method": "none_single_room"
     },
     "calibration": {
       "interval_method": "propagated (sensor-noise model)",

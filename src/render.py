@@ -18,11 +18,12 @@ def render_plan(recon, out_path: str, openings=None, title: str = "Floor plan"):
                    alpha=0.5, linewidths=0, label="wall points")
     ax.plot(poly[:, 0], poly[:, 1], "-", color="#1f3a5f", lw=2.5, label="footprint")
 
-    # wall length labels
-    for w in fp.walls:
+    # label only the major edges to avoid clutter on irregular footprints
+    major = sorted(fp.walls, key=lambda w: w.length, reverse=True)[:6]
+    for w in major:
         mid = (np.array(w.p0) + np.array(w.p1)) / 2
         ax.annotate(f"{w.length:.2f} m", mid, color="#1f3a5f",
-                    fontsize=10, ha="center", va="center",
+                    fontsize=9, ha="center", va="center",
                     bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.8))
 
     # camera trajectory

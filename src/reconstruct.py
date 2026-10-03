@@ -135,6 +135,8 @@ class Footprint:
     walls: list[Wall]
     area: float
     grid_res: float
+    perimeter: float = 0.0
+    method: str = "contour"
     band_xz: np.ndarray = field(repr=False, default=None)
 
 
@@ -163,26 +165,57 @@ def _wall_cells(P: np.ndarray, floor: Plane, ceiling: Plane, res: float):
     return np.c_[cells[:, 1] * res + xmin, cells[:, 0] * res + zmin]
 
 
+def _perimeter(poly: np.ndarray) -> float:
+    return float(sum(np.hypot(*(poly[(i + 1) % len(poly)] - poly[i]))
+                     for i in range(len(poly))))
+
+
 def build_footprint(P: np.ndarray, floor: Plane, ceiling: Plane,
-                    cam_centroid_xz: np.ndarray, res: float = 0.04) -> Footprint:
+                    cam_centroid_xz: np.ndarray, res: float = 0.04,
+                    method: str = "contour", simplify: float = 0.15) -> Footprint:
+    """
+    method="contour" (production): orientation-free outer contour of the
+        occupied room band. Makes no 4-wall assumption, so it is faithful to
+        non-rectangular / cluttered spaces and its AREA and PERIMETER are
+        highly repeatable. Walls = simplified polygon edges.
+    method="box" (baseline, kept for the fix loop): min-area oriented rectangle
+        over tall wall columns. Assumes a rectangular Manhattan room; its side
+        lengths are NOT repeatable on non-rectangular spaces (see fix loop).
+    """
     cells = _wall_cells(P, floor, ceiling, res)
-    # Drop stray wall cells (reflections, points seen through a doorway).
     lab = DBSCAN(eps=0.25, min_samples=5).fit_predict(cells)
-    if (lab >= 0).any():
-        main = cells[lab == np.bincount(lab[lab >= 0]).argmax()]
+    main = cells[lab == np.bincount(lab[lab >= 0]).argmax()] if (lab >= 0).any() else cells
+
+    if method == "box":
+        rect = cv2.minAreaRect(main.astype(np.float32))
+        poly = np.array(cv2.boxPoints(rect), dtype=np.float64)
     else:
-        main = cells
+        poly = _contour_polygon(P, floor, ceiling, res, simplify)
 
-    # Rooms are predominantly rectangular (Manhattan assumption); fit the
-    # minimum-area oriented box to the dominant wall structure. Non-rectangular
-    # rooms are a documented known-failure mode (see technical report).
-    rect = cv2.minAreaRect(main.astype(np.float32))
-    box = cv2.boxPoints(rect)                          # 4 ordered corners
-    poly_world = np.array(box, dtype=np.float64)
+    walls = _walls_from_polygon(poly, main)
+    area = _polygon_area(poly)
+    return Footprint(poly, walls, area, res, _perimeter(poly), method, main)
 
-    walls = _walls_from_polygon(poly_world, main)
-    area = _polygon_area(poly_world)
-    return Footprint(poly_world, walls, area, res, main)
+
+def _contour_polygon(P, floor, ceiling, res, simplify):
+    band = P[(P[:, 1] > floor.y + 0.05) & (P[:, 1] < ceiling.y - 0.05)]
+    xz = band[:, [0, 2]]
+    xmin, zmin = xz.min(0) - 0.3
+    W = int((xz[:, 0].max() + 0.3 - xmin) / res) + 1
+    H = int((xz[:, 1].max() + 0.3 - zmin) / res) + 1
+    img = np.zeros((H, W), np.uint8)
+    cc = np.clip(((xz[:, 0] - xmin) / res).astype(int), 0, W - 1)
+    rr = np.clip(((xz[:, 1] - zmin) / res).astype(int), 0, H - 1)
+    img[rr, cc] = 1
+    img = cv2.morphologyEx(img, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8), iterations=2)
+    img = cv2.morphologyEx(img, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8), iterations=1)
+    _, lab, stats, _ = cv2.connectedComponentsWithStats(img)
+    big = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+    img = (lab == big).astype(np.uint8)
+    cnts, _ = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    cnt = max(cnts, key=cv2.contourArea)
+    approx = cv2.approxPolyDP(cnt, simplify / res, True).reshape(-1, 2).astype(float)
+    return np.c_[approx[:, 0] * res + xmin, approx[:, 1] * res + zmin]
 
 
 def _walls_from_polygon(poly: np.ndarray, band_xz: np.ndarray) -> list[Wall]:
@@ -229,11 +262,12 @@ class Reconstruction:
 
 
 def reconstruct(cap: Capture, frame_stride: int = 6, min_conf: int = 2,
-                frame_filter=None, pose_fn=None) -> Reconstruction:
+                frame_filter=None, pose_fn=None,
+                method: str = "contour") -> Reconstruction:
     P, C = fuse(cap, frame_stride=frame_stride, min_conf=min_conf,
                 frame_filter=frame_filter, pose_fn=pose_fn)
     cam = np.array([[f.pose_world_cam[0, 3], f.pose_world_cam[2, 3]]
                     for f in cap.frames]).mean(0)
     floor, ceiling = extract_floor_ceiling(P)
-    fp = build_footprint(P, floor, ceiling, cam)
+    fp = build_footprint(P, floor, ceiling, cam, method=method)
     return Reconstruction(P, C, floor, ceiling, fp, cam)

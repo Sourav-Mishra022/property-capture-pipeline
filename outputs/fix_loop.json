@@ -1,0 +1,22 @@
+{
+  "worst_gate": "footprint/wall-length repeatability (LiDAR tier)",
+  "before": {
+    "footprint_method": "box (min-area rectangle)",
+    "area_delta_pct": 1.1,
+    "even_sides_area_m2": 28.7,
+    "odd_sides_area_m2": 29.02,
+    "verdict": "per-wall deltas up to ~84 cm / ~14% -> FAIL"
+  },
+  "after": {
+    "footprint_method": "contour (orientation-free)",
+    "area_delta_pct": 0.03,
+    "perimeter_delta_pct": 0.87,
+    "verdict": "area 0.03% / perimeter 0.87% -> PASS (<=2% area)"
+  },
+  "prediction_vs_actual": {
+    "predicted": "area <=2%, perimeter <=5%",
+    "actual_area_pct": 0.03,
+    "actual_perimeter_pct": 0.87
+  },
+  "residual_known_failure": "Per-wall straight-line lengths and opening widths still require 3D plane-based wall segmentation (designed, not shipped). The contour fix makes the whole-room metrics repeatable; it does not recover individual walls on a non-rectangular space."
+}

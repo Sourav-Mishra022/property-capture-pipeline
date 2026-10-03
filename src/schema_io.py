@@ -65,6 +65,8 @@ def build_output(recon, capture_id: str, tier: str, command: str,
         "rooms": [room],
         "property_plan": {
             "footprint_area": fa.as_dict(),
+            "footprint_perimeter_m": round(fp.perimeter, 3),
+            "footprint_method": fp.method,
             "adjacency": [],
             "overlaps_detected": False,
             "rendered_plan_path": f"{capture_id}_plan.png",
