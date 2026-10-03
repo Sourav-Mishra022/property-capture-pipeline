@@ -44,11 +44,14 @@ provided sample, unzip `single_room.zip` into `data/` so that
 python run.py --capture data/c00a170fe1 --tier lidar     # plan + JSON + drift ablation
 python benchmark/repeatability.py data/c00a170fe1        # even/odd repeatability
 python benchmark/fix_loop.py data/c00a170fe1             # before(box) vs after(contour)
+python benchmark/run_all.py                              # whole benchmark over data/*
 ```
 
-Headline results on the sample: footprint **28.6 m²**, ceiling **2.04 m**
-(under-observed, wide interval), repeatability **area 0.03%**, fix loop
-**14% → 0.03%**.
+Headline results: run on **two unseen captures** (`c00a170fe1` 28.6 m²,
+`1a8384c3f6` 83.4 m²) by the identical command — area repeatability 0.03% and
+0.50%; the ceiling gate passes where the ceiling is observed (0.1 cm) and fails
+honestly where it is not (3.9 cm). Fix loop moved footprint repeatability from
+14% to 0.03%. Full table in `docs/benchmark_report.md`.
 
 ## Layout
 
