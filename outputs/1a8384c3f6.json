@@ -4,7 +4,7 @@
     "capture_id": "1a8384c3f6",
     "tier": "lidar",
     "device": "sample-dataset",
-    "timestamp_utc": "2026-10-03T18:54:56.278748+00:00",
+    "timestamp_utc": "2026-10-03T19:23:44.751961+00:00",
     "command": "python run.py --capture /home/claude/property_pipeline/data/1a8384c3f6 --tier lidar --out /home/claude/property_pipeline/outputs"
   },
   "rooms": [

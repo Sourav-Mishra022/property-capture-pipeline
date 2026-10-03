@@ -47,11 +47,13 @@ python benchmark/fix_loop.py data/c00a170fe1             # before(box) vs after(
 python benchmark/run_all.py                              # whole benchmark over data/*
 ```
 
-Headline results: run on **two unseen captures** (`c00a170fe1` 28.6 m²,
-`1a8384c3f6` 83.4 m²) by the identical command — area repeatability 0.03% and
-0.50%; the ceiling gate passes where the ceiling is observed (0.1 cm) and fails
-honestly where it is not (3.9 cm). Fix loop moved footprint repeatability from
-14% to 0.03%. Full table in `docs/benchmark_report.md`.
+Headline results: run on **three unseen captures** (28.6 / 83.4 / 111.2 m², a
+4× scale range) by the identical command — footprint-area repeatability
+0.03–0.77% (all ≤2%); the ceiling gate passes where the ceiling is observed
+(2.79 m, 0.1 cm) and fails honestly where it is not (3.9 cm), and the report
+calls out a repeatable-but-biased ceiling as the reason absolute laser GT
+matters. Fix loop moved footprint repeatability from 14% to 0.03%. Full table
+in `docs/benchmark_report.md`.
 
 ## Layout
 

@@ -155,10 +155,13 @@ tier plus a truthful account is worth more than three half-working tiers.
 ## 9. Known failure modes
 
 - Non-rectangular per-wall decomposition (§5) — needs plane segmentation.
-- **Ceiling under-observation:** the sample barely images the ceiling;
-  repeatability spread 3.9 cm fails the 1 cm gate. Reported as
-  `bias_or_noise` and a widened interval rather than hidden. The
-  `single_scan_with_ceiling` capture is the one meant for this gate.
+- **Ceiling under-observation & repeatable bias:** across the three captures
+  the ceiling lands at 2.04 / 2.02 / **2.79 m**. The well-swept capture
+  (`c7d28f72c6`) gives the correct ~2.79 m; `c00a170fe1` is *unrepeatable*
+  (3.9 cm) and caught by the gate; `1a8384c3f6` is *repeatable but ~0.8 m
+  biased low* — precision cannot catch that, only absolute laser GT can (the
+  hardware gap). Reported honestly in `docs/benchmark_report.md` rather than
+  hidden; the capture protocol's ceiling-sweep step exists to prevent it.
 - Mirrors/glass/wet-look/low-light: ARKit returns low-confidence depth there;
   we drop confidence<2, which removes most such points at the cost of coverage
   holes. A specular/reflective-surface classifier is the designed next step.
