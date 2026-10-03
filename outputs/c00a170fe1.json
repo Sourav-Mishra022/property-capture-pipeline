@@ -4,7 +4,7 @@
     "capture_id": "c00a170fe1",
     "tier": "lidar",
     "device": "sample-dataset",
-    "timestamp_utc": "2026-10-03T18:25:06.864642+00:00",
+    "timestamp_utc": "2026-10-03T18:27:05.437483+00:00",
     "command": "python run.py --capture data/c00a170fe1 --tier lidar --out outputs"
   },
   "rooms": [
@@ -1053,6 +1053,8 @@
         "method": "propagated"
       }
     },
+    "footprint_perimeter_m": 28.683,
+    "footprint_method": "contour",
     "adjacency": [],
     "overlaps_detected": false,
     "rendered_plan_path": "c00a170fe1_plan.png"
@@ -1060,7 +1062,11 @@
   "provenance": {
     "tier": "lidar",
     "drift_handling": {
-      "method": "none_single_room"
+      "method": "plane_anchored",
+      "floor_tilt_deg_before": 0.044,
+      "ablation_footprint_off_m2": 28.589,
+      "ablation_footprint_on_m2": 28.598,
+      "note": "Single-room capture: no loop to close, so the correction is small by construction. Interface accepts pose-graph output for multi-room (see report)."
     },
     "calibration": {
       "interval_method": "propagated (sensor-noise model)",
