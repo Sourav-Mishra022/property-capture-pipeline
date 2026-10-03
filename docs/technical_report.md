@@ -130,9 +130,20 @@ path taken — the hook always runs.
 
 ## 7. Video & photo tiers (designed)
 
-- **Video:** decode `rgb.mp4`, run COLMAP/visual-SLAM for a sparse pose track;
-  recover **metric** scale from ARKit intrinsics (and, when present, the
-  companion depth) or a metric-depth prior; feed the same backend. Gate ≤3%.
+- **Video:** decode `rgb.mp4`, run SfM/visual-SLAM for a pose track; recover
+  **metric** scale and feed the same backend. Gate ≤3%.
+  **Empirically probed (not just asserted):** I ran COLMAP on the 45 sharpest
+  frames of `c00a170fe1` (`benchmark/video_tier_probe.py`). It **fragmented** —
+  three disconnected sub-models registering only 3 / 11 / 11 of 45 images — and
+  the clip's Laplacian-variance texture tops out at 28 (median 7), i.e. heavy
+  motion blur. Conclusion: *feature-based* SfM is the wrong tool for this
+  stream. The shippable video tier instead uses ARKit's **visual-inertial
+  poses** (available on any iPhone 15+, not just LiDAR models, and robust to
+  blur because they fuse IMU) plus a **monocular metric-depth model** on the
+  RGB frames, fused through the identical backend. That model's weights can't
+  be fetched in this sandbox (restricted network, no GPU), so this tier is
+  designed and probed, not shipped — the blocker is the environment, not the
+  approach.
 - **Photos (the floor):** 2–8 unordered stills per room → feed-forward
   multiview (DUSt3R / MASt3R-SfM) which needs no intrinsics or poses; scale from
   a metric-depth model or a known-dimension prior (a door leaf); **stitch
